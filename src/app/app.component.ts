@@ -32,13 +32,25 @@ export class AppComponent {
 
   OnFilter(filter: string)
   {
-    this.dataService.getData(filter);
+      //   var response=  this.dataService.getData().
+      // //  .subscribe(x => this.datajson = x);
+      //  console.log ('response');
+      //  console.log (response);
 
-    // this.dataService.readJsonData()
-    // .subscribe(x => this.datajson = x);
+      // var response=  this.dataService.getData()
+      // .subscribe(x => this.datacsv = x);
+      
+      // this.datajson= response;
+    //  this.datacsv= response.datacsv;
+
+    //  console.log (this.datajson);
+    //  console.log (this.datacsv);
    
-    // this.dataService.readCsvData()
-    // .subscribe(x => this.datacsv = x);
+    this.dataService.readJsonData()
+    .subscribe(x => this.datajson = x);
+   
+    this.dataService.readCsvData()
+    .subscribe(x => this.datacsv = x);
   }
 
 

@@ -3,6 +3,9 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
 import { _ } from 'underscore';
 
+import { Observable } from 'rxjs/Rx';
+
+import { forkJoin } from "rxjs/observable/forkJoin";
 
 @Injectable()
 export class PrimarySourcesService {
@@ -11,27 +14,70 @@ export class PrimarySourcesService {
 
   constructor(private http:Http) { }
 
-  getData(filter: string){
-    this.readJsonData();
-    this.readCsvData();
+  // getData(){
+  //    let dataA= this.readJsonData();
+  //    let dataB= this.readCsvData();
 
-    // return mixAndFilterData;
+  //    return forkJoin([dataA, dataB]).subscribe(results => {
+  //      console.log (results[0]);
+  //      console.log ( results[1]);
+  //     // results[0] is our character
+  //     // results[1] is our character homeworld
+  //     return {
+  //       data1: results[0],
+  //       data2: results[1]
+  //     }
+  //     // return [].concat (results[0], results[1]);
+  //   });
 
-  }
+
+  // }
+
+  // activateSearch():Observable<any> {
+  //   return this.getAllJsonAndCsvData();
+  // }
+
+  // getAllJsonAndCsvData():Observable<any>{
+  //   const dataA= this.http.get('./assets/data/infoColors.json')
+  //   .map(jsonData => 
+  //     jsonData.json());
+
+  //     const dataB= this.http.get ('./assets/data/users.csv')
+  //     .map(
+  //       data => this.extractData(data),
+  //       err => this.handleError(err)
+  //       );
+
+  //       return Observable.forkJoin([dataA, dataB])
+  //       .map (Responses => {
+  //         console.log ('info');
+  //         console.log (Responses[0]);
+  //         console.log (Responses[1]);
+  //         return [].concat (Responses[0], Responses[1]);
+  //         // responses[0] => cars
+  //       // responses[1] => bikes
+
+  //       })
+
+        
+
+
+  // }
 
   readJsonData() {
-    // return
-     this.http.get('./assets/data/infoColors.json')
+    console.log ('json obtained')
+       return                     this.http.get('./assets/data/infoColors.json')
       .map(x  => this.datajson=x.json());
+      // console.log ('json obtained')
+      
   }
 
 
   readCsvData() {
-    // return 
-    this.http.get('./assets/data/users.csv')
+      return          this.http.get('./assets/data/users.csv')
       .map(
-      data => this.extractData(data),
-      err => this.handleError(err)
+      data => this.extractData(data)
+      // err => this.handleError(err)
       );
   }
 
@@ -54,8 +100,9 @@ export class PrimarySourcesService {
       }
     }
     this.datacsv = lines;
+    console.log('data obtained');
     return lines;
-    // console.log(lines);
+     
   }
 
   private handleError(error: any) {
@@ -68,8 +115,19 @@ export class PrimarySourcesService {
   }
 
 
-  mixAndFilterData() {
+  // mixAndFilterData() {
+  //   console.log (this.datajson);
+  //   if (this.datajson)
+  //   {
+  //     console.log('info returned');
+  //     console.log (this.datajson);
+  //     console.log (this.datacsv);
+  //     return {
+  //       datajson: this.datajson,
+  //       datacsv: this.datacsv
+  //     }
 
-  }
+  //   }
+  // }
 
 }
